@@ -5,7 +5,7 @@ from utils.main import (
     get_rolling_mean,
     get_differencing_order,
     scaling,
-    evaluate_model,
+    evaluate_model, 
     get_forecast,
     inverse_scaling
 )
