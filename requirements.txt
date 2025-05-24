@@ -7,4 +7,5 @@ numpy
 pandas_ta
 statsmodels
 scikit-learn
+setuptools
 
