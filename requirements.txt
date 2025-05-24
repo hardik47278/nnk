@@ -3,7 +3,8 @@ yfinance
 plotly
 ta
 utils
-numpy
+numpy --upgrade
+
 
 pandas_ta
 statsmodels
