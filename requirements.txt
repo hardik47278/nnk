@@ -3,7 +3,7 @@ yfinance
 plotly
 ta
 utils
-numpy==1.22
+numpy
 
 pandas_ta
 statsmodels
