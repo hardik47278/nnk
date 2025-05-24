@@ -3,8 +3,8 @@ yfinance
 plotly
 ta
 utils
-numpy==1.23.5
+numpy
 pandas_ta
-statsmodels==0.14.0
+statsmodels
 scikit-learn
 
