@@ -7,3 +7,4 @@ numpy==1.23.5
 pandas_ta
 statsmodels==0.14.0
 scikit-learn
+distutils
