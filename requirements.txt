@@ -1,10 +1,10 @@
-streamlit==1.22.0
-yfinance==0.2.28
-plotly==5.15.0
-ta==0.11.0
-numpy==1.21.0
-pandas_ta==0.3.14b0
+streamlit
+yfinance
+plotly
+ta
+numpy
+pandas_ta
 statsmodels==0.14.0
-scikit-learn==1.2.2
-setuptools==67.7.2
+scikit-learn
+setuptools
 
