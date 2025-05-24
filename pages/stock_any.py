@@ -4,7 +4,7 @@ import numpy as np
 import yfinance as yt
 import plotly.graph_objects as go
 import datetime
-import ta
+import ta 
 from plotly_figure import plotly_table, candlestick, RSI, MACD
 
 
