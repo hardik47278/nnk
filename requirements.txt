@@ -1,7 +1,7 @@
 streamlit
 yfinance
 plotly
-ta
+ta 
 numpy
 pandas_ta
 statsmodels==0.14.0
