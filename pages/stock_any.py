@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 import numpy as np
-nan_value = np.nan
+from numpy import NaN
 
 import yfinance as yt
 import plotly.graph_objects as go
