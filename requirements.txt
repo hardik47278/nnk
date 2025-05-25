@@ -4,7 +4,7 @@ plotly
 ta
 NumPy 1.22
 pandas_ta
-statsmodels==0.14.0
+statsmodels
 scikit-learn
 setuptools
 
