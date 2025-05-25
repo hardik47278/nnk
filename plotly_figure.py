@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 import numpy as np
 
-nan_value = np.nan
+from numpy import NaN
 
 import dateutil
 import pandas_ta as ta
