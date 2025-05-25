@@ -9,43 +9,55 @@ from utils.main import (
     get_forecast,
     inverse_scaling
 )
-from plotly_figure import plotly_table, Moving_average, Moving_average_forecast
+from plotly_figure import plotly_table, Moving_average_forecast
 
+# Streamlit page config
 st.set_page_config(
     page_title="Stock Prediction",
-    page_icon="chart_with_downward_trend",
+    page_icon="📉",
     layout="wide"
 )
 
-st.title("Stock Prediction")
+st.title("📈 Stock Prediction Dashboard")
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    ticker = st.text_input("Stock Ticker", "AAPL")
+# Input: Stock Ticker
+ticker = st.text_input("Enter Stock Ticker (e.g. AAPL)", value="AAPL")
+
+# Display prediction header
+st.subheader(f"Forecasting Next 30 Days Closing Prices for **{ticker}**")
 
 rmse = 0
 
-st.subheader(f"Predicting Next 30 Days Close Price for {ticker}")
-
 try:
-    close_price = get_data(ticker)
-    rolling_price = get_rolling_mean(close_price)
+    with st.spinner("📦 Fetching stock data..."):
+        close_price = get_data(ticker)
 
-    differncing_order = get_differencing_order(rolling_price)
-    scaled_data, scaler = scaling(rolling_price)
-    rmse = evaluate_model(scaled_data, differncing_order)
+    with st.spinner("🔁 Applying rolling mean..."):
+        rolling_price = get_rolling_mean(close_price)
 
-    st.write(f"Model RMSE Score: **{rmse}**")
+    with st.spinner("🔍 Identifying differencing order..."):
+        differencing_order = get_differencing_order(rolling_price)
 
-    forecast = get_forecast(scaled_data, differncing_order)
-    forecast['Close'] = inverse_scaling(scaler, forecast['Close'])
+    with st.spinner("📐 Scaling data..."):
+        scaled_data, scaler = scaling(rolling_price)
 
-    st.write("Forecast Data (Next 30 Days)")
-    fig_tail = plotly_table(forecast.sort_index(ascending=True).round(3))
-    fig_tail.update_layout()
-    st.plotly_chart(fig_tail, use_container_width=True)
+    with st.spinner("📊 Evaluating SARIMA model..."):
+        rmse = evaluate_model(scaled_data, differencing_order)
+        st.success(f"Model RMSE Score: **{rmse:.4f}**")
 
-    forecast = pd.concat([rolling_price, forecast])
-    st.plotly_chart(Moving_average_forecast(forecast.iloc[150:]), use_container_width=True)
+    with st.spinner("📈 Forecasting next 30 days..."):
+        forecast = get_forecast(scaled_data, differencing_order)
+        forecast['Close'] = inverse_scaling(scaler, forecast['Close'])
+
+    # Display forecast
+    st.markdown("### 📅 Forecast Table")
+    fig_table = plotly_table(forecast.sort_index().round(3))
+    st.plotly_chart(fig_table, use_container_width=True)
+
+    # Plot original + forecast
+    forecast_full = pd.concat([rolling_price, forecast])
+    st.markdown("### 🔮 Forecast Visualization")
+    st.plotly_chart(Moving_average_forecast(forecast_full.iloc[150:]), use_container_width=True)
+
 except Exception as e:
-    st.error(f"Error: {e}")
+    st.error(f"⚠️ An error occurred: {e}")
