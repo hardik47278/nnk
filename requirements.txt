@@ -2,7 +2,7 @@ streamlit
 yfinance
 plotly
 ta
-numpy>=2.0
+numpy=2.0
 pandas_ta
 statsmodels==0.14.0
 scikit-learn
