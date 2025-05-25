@@ -4,7 +4,7 @@ from sklearn.metrics import mean_squared_error
 from statsmodels.tsa.arima.model import ARIMA
 import numpy as np
 
-nan_value = np.nan
+from numpy import NaN
 
 from sklearn.preprocessing import StandardScaler
 from datetime import datetime, timedelta
